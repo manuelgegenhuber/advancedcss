@@ -1,0 +1,192 @@
+/*
+COLORS:
+
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+
+*/
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: #777;
+    padding: 30px;
+}
+
+.header {
+    height: 95vh;
+    /*gradient with "background-image" - left is on top of right parameter*/
+    background-image: linear-gradient( to right bottom, #7ed56fb0, #28b485b2), url('../img/hero.jpg');
+    /*gets full image in parent*/
+    background-size: cover;
+    /*so it sticks to top (good for responsivness)*/
+    background-position: top;
+    /*cut out bottom right corner of image (x y,x y, x y) - (top left, top right, bottom right, bottom left)*/
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+    /*so the .logo-box's position:absolute references to this container (.header)*/
+    position: relative;
+}
+
+.logo-box {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+}
+
+.logo-box:hover {
+    transform: scale(1.1);
+}
+
+.logo {
+    height: 35px;
+}
+
+.text-box {
+    /*centering container by using position absolute and top left 50% - correct centering with transform*/
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.heading-primary {
+    color: #fff;
+    text-transform: uppercase;
+    backface-visibility: hidden;
+    padding-bottom: 60px;
+}
+
+.heading-primary-main {
+    display: block;
+    font-size: 60px;
+    font-weight: 400;
+    letter-spacing: 35px;
+    /*apply keyfrom*/
+    animation-name: moveInLeft;
+    animation-duration: 2s;
+    animation-timing-function: ease-out;
+}
+
+.heading-primary-sub {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 17.4px;
+    animation-name: moveInRight;
+    animation-duration: 2s;
+}
+
+@keyframes moveInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    80% {
+        opacity: 0.7;
+        transform: translateX(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+@keyframes moveInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    80% {
+        opacity: 0.5;
+        transform: translateX(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+@keyframes moveInBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+.btn:link,
+.btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 40px;
+    display: inline-block;
+    border-radius: 20px;
+    transition: all .2s;
+    /*to set this container as target for .btn::after*/
+    position: relative;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+
+.btn-white {
+    background-color: #fff;
+    color: #777;
+}
+
+
+/*::after - pseudo element ,creates an element and sets it behind the .btn-Element*/
+
+.btn::after {
+    /*needs to be specified for ::after to appear on the page.*/
+    content: "";
+    /*same as the original .btn*/
+    display: inline-block;
+    /*::after is treated like a child of .btn*/
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*to set it behind the .btn*/
+    z-index: -1;
+}
+
+.btn-white::after {
+    background-color: #fff;
+}
+
+.btn:hover::after {
+    transform: scaleX(1.2) scaleY(1.5);
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.btn-animated {
+    animation-name: moveInBottom;
+    animation-duration: 2s;
+    animation-timing-function: ease-out;
+    /*applys the property of the 0% in the animation (moveInBottom) to the element before the animation starts*/
+    animation-fill-mode: backwards;
+}
