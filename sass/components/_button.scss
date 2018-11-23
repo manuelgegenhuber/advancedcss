@@ -31,6 +31,13 @@
                 background-color: $color-white;
             }
         }
+        &--green {
+            background-color: $color-primary;
+            color: $color-white;
+            &::after {
+                background-color: $color-primary;
+            }
+        }
         /*::after - pseudo element ,creates an element and sets it behind the btn-Element*/
         &::after {
             /*needs to be specified for ::after to appear on the page.*/
